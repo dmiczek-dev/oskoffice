@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>OSK Kursant</title>
+
+    <th:block th:include="/include/css" />
+
+</head>
+
+<body>
+
+    <th:block th:include="include/header" />
+
+    <div class="infbar">
+        <div class="container clearfix">
+            <div class="row">
+                <h2 class="mr-md-auto d-md-flex">Jak rozpocząć kurs</h2>
+                <nav aria-label="breadcrumb">
+              <ol class="mybreadcrumb ml-md-auto d-md-flex mt-md-auto">
+                <li class="breadcrumb-item"><a href="/">OSK Kursant</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Poradnik</li>
+              </ol>
+            </nav>
+            </div>
+            
+        </div>
+    </div>
+    
+    <blockquote class="blockquote text-center mt-5 font-weight-light text-justify">
+        <h3 class="display-4">Profil Kandydata Na Kierowcę</h3>
+        <p class="mb-5">(do pobrania w Starostwie Powiatowym lub w Urzędzie Miasta)</p>
+        <h4>Wymagane dokumenty:</h4>
+        <p class="mb-5">- wypełniony wniosek (do pobrania na miejscu) <br/>
+        - aktualne zdjęcie (na wprost, nie profil) <br/>
+        - orzeczenie lekarskie o braku przeciwwskazań do kierowania pojazdem <br/>
+        - dowód tożsamości (dowód osobisty lub paszport lub legitymacja) <br/>
+        - zgoda rodziców (w przypadku gdy osoba nie ukończyła 18 roku życia) <br/>
+        </p>
+        <h4>Z nadanym numerem PKK osoba udaje się, do wybranego przez siebie OSK</h4>
+        <p class="mb-3">Warunkiem rozpoczęcia kursu jest wymagany wiek, co najmniej 17 lat i 9 miesięcy</p>
+        <footer class="blockquote-footer mb-5">OSK Kursant</footer>
+    </blockquote>  
+    
+    <th:block th:include="include/footer" />
+    <th:block th:include="include/js" />
+
+</body>
+
+</html>

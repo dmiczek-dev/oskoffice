@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <title>OSK Kursant</title>
+
+    <th:block th:include="include/css" />
+
+</head>
+
+<body>
+
+<th:block th:include="include/header" />
+
+<div class="infbar">
+    <div class="container clearfix">
+        <div class="row">
+            <h2 class="mr-md-auto d-md-flex">Artykuł</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="mybreadcrumb ml-md-auto d-md-flex mt-md-auto">
+                    <li class="breadcrumb-item"><a href="/">OSK Kursant</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Artykuł</li>
+                </ol>
+            </nav>
+        </div>
+
+    </div>
+</div>
+
+<div class="container clearfix mb-4">
+    <!--            <embed src="vendor/files/13_obser_20.pdf" width="800px" height="2100px" />-->
+    <iframe src="files/artykul.pdf" style="width: 100%;height: 1000px;border: none;"></iframe>
+</div>
+
+<th:block th:include="include/footer" />
+<th:block th:include="include/js" />
+
+</body>
+
+</html>

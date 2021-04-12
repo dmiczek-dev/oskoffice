@@ -1,0 +1,182 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+
+        <title>OSK Kursant</title>
+        <meta name="description" content="Konto administratora"/>
+
+    <th:block th:include="panel/css" />
+    <link rel="stylesheet" href="/assets/css/lib/chosen/chosen.min.css"/>
+
+</head>
+
+<body>
+
+    <!--Sidebar-->
+<th:block th:include="panel/sidebar" />
+
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+
+    <!--Header-->
+    <th:block th:include="panel/header" />
+    <!-- /#header -->
+
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-inner">
+            <div class="row m-0">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Nawigacja</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="main">Strona główna</a></li>
+                                <li class="active">Zakładanie nowego konta</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Content -->
+
+    <div class="content">
+        <div class="animated fadeIn">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Dane konta</strong>
+                        </div>
+                        <div class="card-body">
+                            <!-- Credit Card -->
+                            <div id="pay-invoice">
+                                <div class="card-body">                                    
+                                    <form th:action="@{/admin/zakladanie-konta/stworz}" th:object="${NewAccountForm}" method="post">
+                                        <div class="card-title">
+                                            <h3 class="text-center">Dane logowania</h3>
+                                        </div>
+                                        <hr/>
+                                        <div class="form-group">
+                                            <label for="login" class="control-label mb-1">Login</label>
+                                            <input id="login" name="login" type="text" class="form-control" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password" class="control-label mb-1">Hasło</label>
+                                            <input id="password" name="password" type="password" class="form-control" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email" class="control-label mb-1">Email</label>
+                                            <input id="email" name="email" type="text" class="form-control" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="position" class=" form-control-label">Typ konta</label>
+                                            <div class="input-group">
+                                                <select name="position" id="position" class="form-control">
+                                                    <option th:value="student">Kursant</option>
+                                                    <option th:value="instructor">Instruktor</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="card-title">
+                                            <h3 class="text-center">Dane osobowe</h3>
+                                        </div>
+                                        <hr/>
+                                        <div class="form-group">
+                                            <label for="firstName" class="control-label mb-1">Imię</label>
+                                            <input id="firstName" name="firstName" type="text" class="form-control" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastName" class="control-label mb-1">Nazwisko</label>
+                                            <input id="lastName" name="lastName" type="text" class="form-control" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pkkNumber" class="control-label mb-1">Numer PKK</label>
+                                            <input id="pkkNumber" name="pkkNumber" type="text" class="form-control" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="street" class="control-label mb-1">Ulica</label>
+                                            <input id="street" name="street" type="text" class="form-control" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="city" class="control-label mb-1">Miasto</label>
+                                            <input id="city" name="city" type="text" class="form-control" aria-required="true" aria-invalid="false"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="zipCode" class="control-label mb-1">Kod pocztowy</label>
+                                            <input id="zipCode" name="zipCode" type="text" class="form-control" aria-required="true" aria-invalid="false"/>
+                                        </div>    
+
+                                        <div>
+                                            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                                <span id="payment-button-amount">Załóż konto</span>
+                                                <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div> <!-- .card -->
+
+                </div><!--/.col-->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- /.content -->
+    <div class="clearfix"></div>
+    <!-- Footer -->
+    <th:block th:include="panel/footer" />
+
+
+</div>
+<!-- /#right-panel -->
+<!-- Scripts -->
+<th:block th:include="panel/js" />
+<script src="/assets/js/lib/chosen/chosen.jquery.min.js"></script>
+
+<script>
+
+    jQuery(document).ready(function () {
+        jQuery(".position").chosen({
+            disable_search_threshold: 10,
+            no_results_text: "Oops, nothing found!",
+            width: "100%"
+        });
+    });
+
+    jQuery('#position').change(function () {
+        accountTypeSecure();
+    })
+
+    function accountTypeSecure() {
+        var positionCtrl = jQuery('#position').val();
+        console.log(positionCtrl);
+        if (positionCtrl !== "instructor") {
+            jQuery('#pkkNumber').removeAttr('disabled');
+        } else {
+            jQuery('#pkkNumber').attr('disabled', true);
+        }
+    }
+    accountTypeSecure();
+</script>
+
+</body>
+</html>
+

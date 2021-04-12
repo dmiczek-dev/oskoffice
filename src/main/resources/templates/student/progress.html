@@ -1,0 +1,225 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+
+        <title>OSK Kursant</title>
+        <meta name="description" content="Konto kursanta"/>
+
+    <th:block th:include="panel/css" />
+
+
+</head>
+
+<body>
+
+    <!--Sidebar-->
+<th:block th:include="panel/sidebar" />
+
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+
+    <!--Header-->
+    <th:block th:include="panel/header" />
+    <!-- /#header -->
+
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-inner">
+            <div class="row m-0">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Nawigacja</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="main">Strona główna</a></li>
+                                <li class="active">Postęp</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Content -->
+
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+
+                <div class="col-sm-12 mb-4">
+                        <div class="card-header bg-white"><strong>Postępy kursanta</strong></div>
+                        <div class="card-group">
+                            <div class="card col-md-6 no-padding ">
+                                <div class="card-body">
+                                    <div class="h1 text-muted text-right mb-4">
+                                        <i class="fa fa-book"></i>
+                                    </div>
+
+                                    <div class="h4 mb-0">
+                                        <span class="count" th:value="${studentProgress.theory}" th:text="${studentProgress.theory}"></span><span> / 30</span>
+                                    </div>
+
+                                    <small class="text-muted text-uppercase font-weight-bold">Godzin teoretycznych</small>
+                                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-3" id="theory-bar" style="width: 40%; height: 8px;"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="card col-md-6 no-padding ">
+                                <div class="card-body">
+                                    <div class="h1 text-muted text-right mb-4">
+                                        <i class="fa fa-car"></i>
+                                    </div>
+                                    <div class="h4 mb-0">
+                                        <span class="count" th:value="${studentProgress.practice}" th:text="${studentProgress.practice}"></span><span> / 30</span>
+                                    </div>
+                                    <small class="text-muted text-uppercase font-weight-bold">Godzin praktycznych</small>
+                                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-4" id="practice-bar" style="width: 40%; height: 8px;"></div>
+                                </div>
+                            </div>
+                            <div class="card col-md-6 no-padding ">
+                                <div class="card-body">
+                                    <div class="h1 text-muted text-right mb-4">
+                                        <i class="fa fa-trophy"></i>
+                                    </div>
+                                    <div class="h4 mb-0">
+                                        <div th:if="${studentProgress.theoryExam == 0}">
+                                            <span>Brak wyniku</span>
+                                        </div>
+                                        <div th:if="${studentProgress.theoryExam > 0}">
+                                            <span class="count" th:value="${studentProgress.theoryExam}" th:text="${studentProgress.theoryExam}"></span><span> / 74</span>
+                                        </div>
+                                    </div>
+                                    <small class="text-muted text-uppercase font-weight-bold">Wynik egzaminu teoretycznego</small>
+                                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-2" id="theoryExam-bar" style="width: 40%; height: 8px;"></div>
+                                </div>
+                            </div>
+                            <div class="card col-md-6 no-padding ">
+                                <div class="card-body">
+                                    <div class="h1 text-muted text-right mb-4">
+                                        <i class="fa fa-trophy"></i>
+                                    </div>
+                                    <div class="h4 mb-0">
+                                        <div th:if="${studentProgress.practiceExam == null}">
+                                            <span>Brak wyniku</span>
+                                        </div>
+                                        <div th:if="${studentProgress.practiceExam == false}">
+                                            <span style="color: #dc3545">Niezaliczony</span>
+                                        </div>
+                                        <div th:if="${studentProgress.practiceExam == true}">
+                                            <span style="color: #49a342">Zaliczony</span>
+                                        </div>
+                                    </div>
+                                    <small class="text-muted text-uppercase font-weight-bold">Wynik egzaminu praktycznego</small>
+                                    <div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" id="practiceExam-bar" style="width: 40%; height: 8px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Nauka teorii</strong>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Część teoretyczna trwa 30 godzin, poświęcona jest wiedzy teoretycznej z ruchu drogowego</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Jazdy praktyczne</strong>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Część praktyczna trwa 30 godzin, są to jazdy ćwiczeniowe na placu treningowym oraz w ruchu miejskim </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Egzamin teoretyczny</strong>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Rozwiązanie testu składającego się z serii pytań, zaliczany od 68 punktów na 74 możliwe</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Egzamin praktyczny</strong>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Instruktor ocenia naszą jazdę w środowisku miejskim jak i na placu treningowym</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+
+        <!-- /.content -->
+        <div class="clearfix"></div>
+        <!-- Footer -->
+        <th:block th:include="panel/footer" />
+
+    
+</div>
+<!-- /#right-panel -->
+<!-- Scripts -->
+<th:block th:include="panel/js" />
+
+<script th:inline="javascript">
+    //<![CDATA[
+    jQuery(document).ready(function ($) {
+        var theory = [[${studentProgress.theory}]] / 30 * 100;
+        var practice = [[${studentProgress.practice}]] / 30 * 100;
+        var theoryExam = [[${studentProgress.theoryExam}]] / 74 * 100;
+        var practiceExam = [[${studentProgress.practiceExam}]];
+
+        if(theory == 0) {
+            $("#theory-bar").width('1%');
+        } else {
+            $("#theory-bar").width(theory+'%');
+        }
+        
+        if(practice == 0) {
+            $("#practice-bar").width('1%');
+        } else {
+            $("#practice-bar").width(practice+'%');
+        }
+        
+        if(theoryExam == 0) {
+            $("#theoryExam-bar").width('1%');
+        } else {
+            $("#theoryExam-bar").width(theoryExam+'%');
+        }
+
+        if(practiceExam == null || practiceExam == false) {
+            $("#practiceExam-bar").width('1%');
+        } else {
+            $("#practiceExam-bar").width('100%');
+        }
+    });
+   // ]]>
+</script>
+
+</body>
+</html>
+

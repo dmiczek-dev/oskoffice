@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>OSK Kursant</title>
+
+    <th:block th:include="include/css" />
+
+</head>
+
+<body>
+
+    <th:block th:include="include/header" />
+
+    <div class="infbar">
+        <div class="container clearfix">
+            <div class="row">
+                <h2 class="mr-md-auto d-md-flex">Kontakt</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="mybreadcrumb ml-md-auto d-md-flex mt-md-auto">
+                        <li class="breadcrumb-item"><a href="/">OSK Kursant</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Kontakt</li>
+                    </ol>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container clearfix">
+        <div class="row">
+            <figure class="figure col-md-4">
+                <img src="images/mapa.PNG" class="figure-img img-fluid rounded" style="border: 1px solid #17a2b8" alt="Lokalizacja ośrodka"/>
+            </figure>
+            <blockquote class="blockquote col-md-3 text-justify font-weight-light">
+                <p class="mb-3 font-weight-normal">Dane kontaktowe:</p>
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-phone"></i> 662 207 629</li>
+                    <li><i class="fa fa-envelope-o"></i> rosmansr@wp.pl</li>
+                </ul>
+                <p class="mb-3 font-weight-normal">Dane adresowe:</p>
+                <ul class="list-unstyled">
+                    <li>ul. Węgierska 12</li>
+                    <li>Pilzno, 39-220</li>
+                </ul>
+            </blockquote>
+            <blockquote class="blockquote col-md-5 text-justify font-weight-light">
+            <p class="mb-3 font-weight-normal">Godziny otwarcia:</p>
+                <dl class="row">
+                   <dt class="col-md-3 font-weight-light">Poniedziałek:</dt>
+                   <dd class="col-md-9">14:00 - 18:00</dd>
+                    <dt class="col-md-3 font-weight-light">Wtorek:</dt>
+                   <dd class="col-md-9">14:00 - 18:00</dd>
+                    <dt class="col-md-3 font-weight-light">Środa:</dt>
+                   <dd class="col-md-9">14:00 - 18:00</dd>
+                    <dt class="col-md-3 font-weight-light">Czwartek:</dt>
+                   <dd class="col-md-9">14:00 - 18:00</dd>
+                    <dt class="col-md-3 font-weight-light">Piątek:</dt>
+                   <dd class="col-md-9">14:00 - 18:00</dd>
+                    <dt class="col-md-3 font-weight-light">Sobota:</dt>
+                   <dd class="col-md-9">12:00 - 14:00</dd>
+                    <dt class="col-md-3 font-weight-light">Niedziela:</dt>
+                   <dd class="col-md-9">
+                       <span class="font-weight-normal" style="color: #dc3545;">Zamknięte</span>
+                   </dd>
+                </dl>
+            </blockquote>
+        </div>
+    </div>
+
+    <th:block th:include="include/footer" />
+    <th:block th:include="include/js" />
+
+</body>
+
+</html>

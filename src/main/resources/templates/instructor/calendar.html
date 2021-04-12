@@ -1,0 +1,554 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+
+        <title>OSK Kursant</title>
+        <meta name="description" content="Konto instruktora"/>
+
+    <th:block th:include="panel/css" />
+    <link rel="stylesheet" href="/assets/css/lib/chosen/chosen.min.css"/>
+
+
+</head>
+
+<body>
+    <div class="notifications top-right" style="right: 15px; opacity: 0.85;"></div>
+    <!--Sidebar-->
+<th:block th:include="panel/sidebar" />
+
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+
+    <!--Header-->
+    <th:block th:include="panel/header" />
+    <!-- /#header -->
+
+
+
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-inner">
+            <div class="row m-0">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Nawigacja</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="main">Strona główna</a></li>
+                                <li class="active">Terminarz</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Content -->
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="calendar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="mediumModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mediumModalLabel">Tworzenie nowego terminu</h5>
+                </div>
+                <form th:action="@{/instruktor/terminarz/nowy-termin}" th:object="${NewTermForm}" method="post">
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="type" class=" form-control-label">Rodzaj zajęć</label>
+                                <select name="type" id="activityType" class="form-control-sm form-control">
+                                    <option value="theory">Zajęcia teoretyczne</option>
+                                    <option value="practice">Zajęcia praktyczne</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="date" class=" form-control-label">Data</label>
+                                <select name="date" data-placeholder="Wybierz date..." class="standardSelect">
+                                    <option value="" label="default"></option>
+                                    <option th:each="dayTerm : ${monthTerms}" th:value="${dayTerm}" th:text="${dayTerm}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="startTime" class=" form-control-label">Godzina rozpoczęcia</label>
+                                    <div class="input-group">
+                                        <input name="startTime" type="time" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="endTime" class=" form-control-label">Godzina zakończenia</label>
+                                    <div class="input-group">
+                                        <input name="endTime" type="time" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="student" class=" form-control-label">Kursant</label>
+                                <select name="studentId" id="studentCtrl" class="form-control-sm form-control">
+                                    <option value="" label="Wybierz kursanta..."></option>
+                                    <option th:each="student : ${allStudents}" th:value="${student.studentId}" th:text="${student.firstName +' '+ student.lastName}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="vehicle" class=" form-control-label">Pojazd</label>
+                                <select name="vehicleId" id="vehicleCtrl" class="form-control-sm form-control">
+                                    <option value="" label="Wybierz pojazd..."></option>
+                                    <option th:each="vehicle : ${allVehicles}" th:value="${vehicle.vehicleId}" th:text="${vehicle.model +' ['+ vehicle.vehicleCode +']'}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="description" class=" form-control-label">Opis</label>
+                                <textarea name="description" id="textarea-input" rows="5" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <input type="hidden" name="employeeId" th:value="${employee.employeeId}"/>
+                    <input type="hidden" name="firmId" th:value="${firm.firmId}"/>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                        <button type="submit" class="btn btn-primary">Stwórz</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mediumModalLabel">Edytowanie terminu</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="type" class=" form-control-label">Rodzaj zajęć</label>
+                            <select name="type" id="activity" class="form-control-sm form-control">
+                                <option value="theory">Zajęcia teoretyczne</option>
+                                <option value="practice">Zajęcia praktyczne</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="student" class=" form-control-label">Kursant</label>
+                            <select name="studentId" id="student" class="form-control-sm form-control">
+                                <option value="" label="Wybierz kursanta..."></option>
+                                <option th:each="student : ${allStudents}" th:value="${student.studentId}" th:text="${student.firstName +' '+ student.lastName}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="vehicle" class=" form-control-label">Pojazd</label>
+                            <select name="vehicleId" id="vehicle" class="form-control-sm form-control">
+                                <option value="" label="Wybierz kursanta..."></option>
+                                <option th:each="vehicle : ${allVehicles}" th:value="${vehicle.vehicleId}" th:text="${vehicle.model +' ['+ vehicle.vehicleCode +']'}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label for="description" class=" form-control-label">Opis</label>
+                            <textarea name="description" id="desc" rows="5" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <input type="hidden" name="employeeId" th:value="${employee.employeeId}"/>
+                <input type="hidden" name="firmId" th:value="${firm.firmId}"/>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                    <button type="button" id="btnUpdateTerm" class="btn btn-primary">Aktualizuj</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- /.content -->
+    <div class="clearfix"></div>
+    <!-- Footer -->
+    <th:block th:include="panel/footer" />
+
+
+</div>
+<!-- /#right-panel -->
+<!-- Scripts -->
+<th:block th:include="panel/js" />
+<script src="/assets/js/lib/chosen/chosen.jquery.min.js"></script>
+
+
+<script type="text/javascript" th:inline="javascript">
+    //    <![CDATA[
+
+    jQuery(document).ready(function () {
+    jQuery(".standardSelect").chosen({
+    disable_search_threshold: 10,
+            no_results_text: "Oops, nothing found!",
+            width: "100%"
+    });
+    });
+    var events = [];
+    var terms = [[${terms}]];
+    console.log(terms);
+    for (i = 0; i < terms.length; i++) {
+//        Sprawdza czy termin jest praktyczny i czy nalezy do instruktora
+    if (terms[i].student || terms.vehicle) {
+    events.push({
+    id: terms[i].termId,
+            title: terms[i].student + '\n\n' + terms[i].employee + '\n' + terms[i].vehicle + '\n\n' + terms[i].description,
+            start: terms[i].date + 'T' + terms[i].startTime,
+            end: terms[i].date + 'T' + terms[i].endTime,
+            color: terms[i].color,
+            textColor: terms[i].textColor,
+            activity: terms[i].activity,
+            studentId: terms[i].studentId,
+            vehicleId: terms[i].vehicleId,
+            description: terms[i].description,
+            employeeId: terms[i].employeeId
+    });
+//            Sprawdza czy termin jest praktyczny i nie nalezy do instruktora
+    } else if (!terms[i].student && terms[i].vehicle) {
+    events.push({
+    id: terms[i].termId,
+            title: terms[i].employee + '\n' + terms[i].vehicle,
+            start: terms[i].date + 'T' + terms[i].startTime,
+            end: terms[i].date + 'T' + terms[i].endTime,
+            color: terms[i].color,
+            textColor: terms[i].textColor,
+            employeeId: terms[i].employeeId,
+            editable: false
+    });
+    } else {
+//            Wynik w przypadku gdy termin jest teoretyczny
+    events.push({
+    id: terms[i].termId,
+            title: terms[i].employee + '\n\n' + terms[i].description,
+            start: terms[i].date + 'T' + terms[i].startTime,
+            end: terms[i].date + 'T' + terms[i].endTime,
+            color: terms[i].color,
+            textColor: terms[i].textColor,
+            activity: terms[i].activity,
+            description: terms[i].description,
+            employeeId: terms[i].employeeId
+    });
+    }
+
+    }
+
+    jQuery(document).ready(function ($) {
+
+    var calendar = $('#calendar').fullCalendar({
+    header: {
+    left: 'prev,next today newEvent',
+            center: 'title',
+            right: 'agendaDay,agendaWeek,listWeek'
+    },
+            defaultView: 'agendaWeek',
+            minTime: '08:00:00',
+            maxTime: '18:00:00',
+            slotDuration: '00:15:00',
+            slotLabelFormat: [
+                    'dddd',
+                    "HH:mm"
+            ],
+            hiddenDays: [0],
+            eventOverlap: true,
+            slotEventOverlap: true,
+            handleWindowResize: true,
+            height: $(window).height() - 200,
+            slotLabelInterval: '01:00:00',
+            slotLabelFormat: 'HH:mm',
+            allDaySlot: false,
+            eventLimit: true,
+            events: events,
+            dropable: true,
+            editable: true,
+            selectable: true,
+//            eventRender: function (event, element) {
+//                if (event.rendering == 'background') {
+//                    element.append(event.title);
+//                }
+//                element.popover({
+//                    html: true
+//                });
+//            },
+            schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+            customButtons: {
+            newEvent: {
+            text: 'Dodaj termin',
+                    click: function () {
+                    $('#mediumModal').modal('show');
+                    $('#activityType').change(function() {
+                        secureTerm();
+                    })
+                    }
+            }
+            },
+            //przenoszenie eventu
+            eventDrop: function (event) {
+                if(event.employeeId == [[${employee.employeeId}]]) {
+                    myTerminTimelineEdit(event);
+                }
+            },
+            //Zmiana czasu trwania terminu
+            eventResize: function (event) {
+                if(event.employeeId == [[${employee.employeeId}]]) {
+                    myTerminTimelineEdit(event);
+                }
+            },
+            //Usuwanie terminu
+            eventRender: function(event, element) {
+                if(event.employeeId == [[${employee.employeeId}]]) {
+                    myTerminDelete(event, element);
+                }
+            },
+            //Edycja terminu
+            eventClick: function (event, element) {
+                if(event.employeeId == [[${employee.employeeId}]]) {
+                    myTerminEdit(event, element);
+                }
+            },
+    });
+    //KONIEC KALENDARZA                           
+    //Wlasne funkcje wykorzystywane przez kalendarz
+
+    //funkcja odpowiada za edycję daty terminu
+    function myTerminTimelineEdit(event) {
+    bootbox.confirm({
+    message: "Czy chcesz zmienić datę terminu?",
+            buttons: {
+            confirm: {
+            label: 'Tak',
+                    className: 'btn-success'
+            },
+                    cancel: {
+                    label: 'Nie',
+                            className: 'btn-danger'
+                    }
+            },
+            callback: function (result) {
+            if (result === true) {
+            $.ajax({
+            type: "POST",
+                    contentType: "application/x-www-form-urlencoded",
+                    url: '/api/instructor/termDateUpdate',
+                    data: {
+                    id: event.id,
+                            start: event.start.format('YYYY-MM-DD HH:mm:ss'),
+                            end: event.end.format('YYYY-MM-DD HH:mm:ss')
+                    },
+                    success: function (data, xhr, textStatus) {
+                    if (data === true) {
+                    } else {
+                    myNotifyTimeout();
+                    }
+                    },
+                    error: function (xhr, textStatus, error) {
+                    alert("Skontaktuj się z administratorem");
+                    }
+            });
+            } else {
+            myNotifyTimeout("Anulowano zmianę daty", "warning");
+            }
+            }
+    });
+    }
+    ;
+//funkcja odżwieża terminy po anulowaniu
+    function myNotifyTimeout() {
+    setTimeout(function () {
+    $('#calendar').fullCalendar('removeEvents');
+    $('#calendar').fullCalendar('addEventSource', events);
+    $('#calendar').fullCalendar('rerenderEvents');
+    $('#calendar').fullCalendar('refetchEventSources', events);
+    }, 600);
+    }
+
+    //funckja odpowiada za wyświetlenie modal do edycji terminu
+    function myTerminEdit(event, element) {
+
+    $('#editModal').modal('show');
+    $('#activity').val(event.activity).change();
+    $('#student').val(event.studentId).change();
+    $('#vehicle').val(event.vehicleId).change();
+    $('#desc').val(event.description).change
+    
+    secureTermEdit();
+    //Funkcja obsĹ‚uguje przycisk w edycji terminu
+    $('#btnUpdateTerm').unbind().click(function () {
+    var activity = $('#activity').val();
+    var student = $('#student').val();
+    var vehicle = $('#vehicle').val();
+    var desc = $('#desc').val();
+    $('#editModal').modal('toggle');
+    bootbox.confirm({
+    message: "Czy chcesz edytować termin",
+            buttons: {
+            confirm: {
+            label: 'Tak',
+                    className: 'btn-success'
+            },
+                    cancel: {
+                    label: 'Nie',
+                            className: 'btn-danger'
+                    }
+            },
+            callback: function (result) {
+            if (result === true) {
+            $.ajax({
+            type: "POST",
+                    contentType: "application/x-www-form-urlencoded",
+                    url: '/api/instructor/termEdit',
+                    data: {
+                    termId: event.id,
+                            activity: activity,
+                            student: student,
+                            vehicle: vehicle,
+                            description: desc
+                    },
+                    success: function (data, xhr, textStatus) {
+                    myNotifyTimeout();
+                    if (data === true) {
+                        location.reload();
+                    } else {
+                    myNotifyTimeout();
+                    }
+                    },
+                    error: function (xhr, textStatus, error) {
+                    alert("Skontaktuj się z administratorem");
+                    }
+            });
+            } else {
+            myNotifyTimeout();
+            }
+            }
+    });
+    });
+    };
+    //Funkcja odpowiada za usuwanie terminu z kalendarza
+    function myTerminDelete (event, element, view) {
+    element.find(".fc-content").prepend("<div style='position:absolute;top:-3px;right:-3px;'><button type='button' class='close' style='opacity:0.9;'><span style='color:white;font-size:22px;'>x</span></button></div>");
+    element.find(".close").on('click', function() {
+    $('#calendar').fullCalendar('removeEvents', event._id);
+    bootbox.confirm({
+    message: "Czy chcesz usunąć termin",
+            buttons: {
+            confirm: {
+            label: 'Tak',
+                    className: 'btn-success'
+            },
+                    cancel: {
+                    label: 'Nie',
+                            className: 'btn-danger'
+                    }
+            },
+            callback: function(result) {
+            if (result === true) {
+            $.ajax({
+            type: "POST",
+                    contentType: "application/x-www-form-urlencoded",
+                    url: '/api/instructor/termDelete',
+                    data: {term_id: event.id, activity: event.activity},
+                    success: function(data, xhr, textStatus) {
+                    if (data === true) {
+                    } else {
+                    myNotifyTimeout();
+                    }
+                    },
+                    error: function(xhr, textStatus, error) {
+                    alert("Skontaktuj się z administratorem");
+                    }
+            });
+            } else {
+            myNotifyTimeout();
+            }
+            }
+    });
+    });
+    }
+
+    function secureTerm() {
+        var activityCtrl = $('#activityType').val();
+        if(activityCtrl === "theory") {
+            $('#studentCtrl').attr('disabled', true);
+            $('#vehicleCtrl').attr('disabled', true);
+        } else {
+            $('#studentCtrl').removeAttr('disabled');
+            $('#vehicleCtrl').removeAttr('disabled');
+        }
+    }
+    secureTerm();
+    
+    function secureTermEdit() {
+        var activityCtrl = $('#activity').val();
+        if(activityCtrl === "theory") {
+            $('#activity').attr('disabled', true);
+            $('#student').attr('disabled', true);
+            $('#vehicle').attr('disabled', true);
+        } else {
+            $('#activity').attr('disabled', true);
+            $('#student').removeAttr('disabled');
+            $('#vehicle').removeAttr('disabled');
+        }
+    }
+    secureTermEdit();
+
+    });
+//    ]]>
+</script>
+
+</body>
+</html>
+
+

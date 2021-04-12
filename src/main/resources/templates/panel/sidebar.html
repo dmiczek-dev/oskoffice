@@ -1,0 +1,69 @@
+<!-- Left Panel -->
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            
+            <!--User-->
+            <ul class="nav navbar-nav mt-3" sec:authorize="hasRole('USER')">
+                <li class="menu-title">Konto kursanta</li><!-- /.menu-title -->
+
+                <li>
+                    <a href="main"> <i class="menu-icon ti-layout"></i>Strona główna </a>
+                </li>
+                <li>
+                    <a href="profil"> <i class="menu-icon ti-user"></i>Profil </a>
+                </li>
+                <li>
+                    <a href="postep"> <i class="menu-icon ti-stats-up"></i>Postęp </a>
+                </li>
+                <li>
+                    <a href="terminarz"> <i class="menu-icon ti-calendar"></i>Terminarz </a>
+                </li>
+
+            </ul>
+            
+            <!--Instructor-->
+            <ul class="nav navbar-nav mt-3" sec:authorize="hasRole('INSTRUCTOR')">
+                <li class="menu-title">Konto instruktora</li><!-- /.menu-title -->
+
+                <li>
+                    <a href="main"> <i class="menu-icon ti-layout"></i>Strona główna </a>
+                </li>
+                <li>
+                    <a href="profil"> <i class="menu-icon ti-user"></i>Profil </a>
+                </li>
+                <li>
+                    <a href="sprawdz-postep"> <i class="menu-icon ti-stats-up"></i>Sprawdź postęp</a>
+                </li>
+                <li>
+                    <a href="terminarz"> <i class="menu-icon ti-calendar"></i>Terminarz </a>
+                </li>
+                <li class="mt-2">
+                    <a href="/logout"> <i class="menu-icon ti-power-off"></i>Wyloguj </a>
+                </li>
+
+            </ul>
+            
+            <!--Admin-->
+            <ul class="nav navbar-nav mt-3" sec:authorize="hasRole('ADMIN')">
+                <li class="menu-title">Konto administratora</li><!-- /.menu-title -->
+
+                <li>
+                    <a href="zakladanie-konta"> <i class="menu-icon ti-user"></i>Załóż nowe konto </a>
+                </li>
+                <li>
+                    <a href="edytuj-kursanta"> <i class="menu-icon ti-settings"></i>Edytuj kursanta</a>
+                </li>
+                <li>
+                    <a href="edytuj-pracownika"> <i class="menu-icon ti-settings"></i>Edytuj pracownika</a>
+                </li>
+                <li class="mt-2">
+                    <a href="/logout"> <i class="menu-icon ti-power-off"></i>Wyloguj </a>
+                </li>
+
+            </ul>
+            
+        </div>
+    </nav>
+</aside>
+<!-- /#left-panel -->

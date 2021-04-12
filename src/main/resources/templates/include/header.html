@@ -1,0 +1,43 @@
+
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+        <div class="container clearfix" id="navbarSupportedContent">
+            <a href="/" class="navbar-brand mr-md-auto d-md-flex"><img src="images/logo.png" /></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navigation">
+                <ul class="navbar-nav ml-md-auto d-md-flex">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">Strona główna</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="onas" class="nav-link">O nas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="cennik" class="nav-link">Cennik</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="galeria" class="nav-link">Galeria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="kontakt" class="nav-link">Kontakt</a>
+                    </li>
+                    <li class="nav-item ml-5" >
+                        <a href="login" class="nav-link" sec:authorize="!hasRole('USER') and !hasRole('INSTRUCTOR') and !hasRole('ADMIN')">Zaloguj</a>
+                    </li>
+
+                    <li class="nav-item dropdown" sec:authorize="hasRole('USER') or hasRole('INSTRUCTOR') or hasRole('ADMIN')">
+                        <a class="nav-link dropdown-toggle" href="#" id="navdrop" role="button" data-toggle="dropdown" data-hover="dropdown">Konto</a>
+                        <div class="dropdown-menu" aria-labelledby="navdrop">
+                            <a href="kursant/main" sec:authorize="hasRole('USER')" class="dropdown-item"><i class="fa fa-user-o" aria-hidden="true"></i>  Profil kursanta</a>
+                            <a href="instruktor/main" sec:authorize="hasRole('INSTRUCTOR')" class="dropdown-item"><i class="fa fa-user-circle" aria-hidden="true"></i>  Profil instruktora</a>
+                            <a href="admin/main" sec:authorize="hasRole('ADMIN')" class="dropdown-item"><i class="fa fa-user-circle-o" aria-hidden="true"></i>  Profil administratora</a>
+                            <a href="/logout" class="dropdown-item"><i class="fa fa-power-off" aria-hidden="true"></i>  Wyloguj</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>

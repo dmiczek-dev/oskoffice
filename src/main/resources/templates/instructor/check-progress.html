@@ -1,0 +1,193 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+
+        <title>OSK Kursant</title>
+        <meta name="description" content="Konto instruktora"/>
+
+    <th:block th:include="panel/css" />
+    <link rel="stylesheet" href="/assets/css/lib/chosen/chosen.min.css"/>
+
+</head>
+
+<body>
+
+    <!--Sidebar-->
+<th:block th:include="panel/sidebar" />
+
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+
+    <!--Header-->
+    <th:block th:include="panel/header" />
+    <!-- /#header -->
+
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-inner">
+            <div class="row m-0">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Nawigacja</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="main">Strona główna</a></li>
+                                <li class="active">Postęp kursanta</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Content -->
+
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+
+                <div class="col-xs-6 col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Kursant</strong>
+                        </div>
+                        <div class="card-body">
+                            <form th:action="@{/instruktor/postep-kursanta}" method="get">
+                                <select data-placeholder="Wybierz kursanta..." class="standardSelect" tabindex="1" name="id">
+                                    <option value="" label="default"></option>
+                                    <option th:each="student : ${allStudents}" th:value="${student.studentId}" th:text="${student.firstName +' '+ student.lastName}"></option>
+                                </select>
+                                <div>
+                                    <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block mt-3">
+                                        <span id="payment-button-amount">Sprawdź postęp</span>
+                                        <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+
+            <div class="row" th:if="${#httpServletRequest.requestURI.startsWith('/instruktor/postep')}">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Postepy kursanta</strong>
+                        </div>
+                        <div class="card-body">
+                            <!-- Credit Card -->
+                            <div id="pay-invoice">
+                                <div class="card-body">
+                                    <form th:action="@{/instruktor/postep-kursanta/aktualizuj}" th:object="${StudentProgress}" method="post">
+                                        <div class="form-group text-center">
+                                            <div class="mx-auto d-block">
+                                                <img class="rounded-circle mx-auto d-block" src="/images/avatar/user.png" alt="Card image cap"/>
+                                                <h5 class="text-sm-center mt-2 mb-1" th:text="${student.firstName +' '+ student.lastName}"></h5>
+                                                <div class="location text-sm-center"><i class="fa fa-map-marker"></i><span th:value="${student.city}" th:text="${' ' + student.city + ', Polska'}"></span></div>
+                                            </div>
+                                            <hr/>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="theory" class=" form-control-label">Zajęcia teoretyczne</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon"><i class="fa fa-book"></i></div>
+                                                        <input type="text" id="input1-group1" name="theory" th:value="${studentProgress.theory}" placeholder="Liczba godzin teoretycznych" class="form-control"/>
+                                                        <div class="input-group-addon" style="border-radius: 0 0.25rem 0.25rem 0">/ 30 godzin</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="theory" class=" form-control-label">Zajęcia praktyczne</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon"><i class="fa fa-car"></i></div>
+                                                        <input type="text" id="input1-group1" name="practice" th:value="${studentProgress.practice}" placeholder="Liczba godzin praktycznych" class="form-control"/>
+                                                        <div class="input-group-addon" style="border-radius: 0 0.25rem 0.25rem 0">/ 30 godzin</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="theory" class=" form-control-label">Egzamin teoretyczny</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon"><i class="fa fa-trophy"></i></div>
+                                                        <input type="text" id="input1-group1" name="theoryExam" th:value="${studentProgress.theoryExam}" placeholder="Wynik egzaminu teoretycznego" class="form-control"/>
+                                                        <div class="input-group-addon" style="border-radius: 0 0.25rem 0.25rem 0">/ 74 punkty</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="theory" class=" form-control-label">Egzamin praktyczny</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon"><i class="fa fa-trophy"></i></div>
+                                                        <select name="select" id="select" class="form-control" th:field="${studentProgress.practiceExam}">
+                                                            <option th:value="false">Niezaliczony</option>
+                                                            <option th:value="true">Zaliczony</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="studentId" th:value="${studentProgress.studentId}"/>
+                                        <div>
+                                            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                                <span id="payment-button-amount">Aktualizuj</span>
+                                                <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div> <!-- .card -->
+
+                </div><!--/.col-->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- /.content -->
+    <div class="clearfix"></div>
+    <!-- Footer -->
+    <th:block th:include="panel/footer" />
+
+
+</div>
+<!-- /#right-panel -->
+<!-- Scripts -->
+<th:block th:include="panel/js" />
+<script src="/assets/js/lib/chosen/chosen.jquery.min.js"></script>
+
+<script>
+
+    jQuery(document).ready(function () {
+        jQuery(".standardSelect").chosen({
+            disable_search_threshold: 10,
+            no_results_text: "Oops, nothing found!",
+            width: "100%"
+        });
+    });
+
+</script>
+
+</body>
+</html>
+

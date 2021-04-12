@@ -1,0 +1,160 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+
+        <title>OSK Kursant</title>
+        <meta name="description" content="Konto kursanta"/>
+
+    <th:block th:include="panel/css" />
+
+
+</head>
+
+<body>
+
+    <!--Sidebar-->
+<th:block th:include="panel/sidebar" />
+
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+
+    <!--Header-->
+    <th:block th:include="panel/header" />
+    <!-- /#header -->
+
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-inner">
+            <div class="row m-0">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Nawigacja</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li class="active">Strona główna</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Animated -->
+        <div class="animated fadeIn">
+            <!-- Widgets  -->
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-4">
+                                    <i class="pe-7s-users"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count" th:text="${allStudents}"></span></div>
+                                        <div class="stat-heading">Kursantów</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-1">
+                                    <i class="ti-check"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count">50</span>%</div>
+                                        <div class="stat-heading">Zdaje od razu</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-2">
+                                    <i class="ti-car"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count" th:text="${allVehicles}"></span></div>
+                                        <div class="stat-heading">Pojazdy</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-3">
+                                    <i class="ti-home"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count" th:text="${allFirm}"></span></div>
+                                        <div class="stat-heading">Ośrodki</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+<!--        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="card weather-box">
+                    <h4 class="weather-title box-title">Warunki pogodowe do jazdy</h4>
+                    <div class="card-body">
+                        <div class="weather-widget">
+                            <div id="weather-one" class="weather-one"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+    </div>
+
+
+    <!-- /.content -->
+    <div class="clearfix"></div>
+    <!-- Footer -->
+    <th:block th:include="panel/footer" />
+
+</div>
+<!-- /#right-panel -->
+<!-- Scripts -->
+<th:block th:include="panel/js" />
+</body>
+</html>

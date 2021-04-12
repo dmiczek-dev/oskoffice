@@ -1,0 +1,61 @@
+<header id="header" class="header">
+    <div class="top-left">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><h2 class="display-5">OSK Kursant</h2></a>
+            <a class="navbar-brand hidden" href="./"><img src="/images/logo2.png" alt="Logo"/></a>
+            <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+        </div>
+    </div>
+    <div class="top-right">
+        <div class="header-menu">
+            <div class="header-left">
+                <p class="float-left pt-3" th:text="${student.firstName +' '+ student.lastName}" sec:authorize="hasRole('USER')"></p>
+                <p class="float-left pt-3" th:text="${employee.firstName +' '+ employee.lastName}" sec:authorize="hasRole('INSTRUCTOR')"></p>
+                <p class="float-left pt-3" th:text="Administrator" sec:authorize="hasRole('ADMIN')"></p>
+
+
+            <div class="user-area dropdown float-right">
+                <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="user-avatar rounded-circle" src="/images/avatar/user.png" alt="User Avatar"/>
+                    <div style="display:none;">Icons made by 
+                        <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> 
+                        from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> 
+                        is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+                    </div>
+                </a>
+
+                <div class="user-menu dropdown-menu" sec:authorize="hasRole('USER')">
+                    <a class="nav-link" href="profil"><i class="fa ti-user"></i>Mój profil</a>
+
+                    <a class="nav-link" href="postep"><i class="fa ti-stats-up"></i>Zobacz postęp</a>
+
+                    <a class="nav-link" href="terminarz"><i class="fa ti-calendar"></i>Terminarz</a>
+
+                    <a class="nav-link" href="/logout"><i class="fa ti-power-off"></i>Wyloguj</a>
+                </div>
+                
+                <div class="user-menu dropdown-menu" sec:authorize="hasRole('INSTRUCTOR')">
+                    <a class="nav-link" href="profil"><i class="fa ti-user"></i>Mój profil</a>
+
+                    <a class="nav-link" href="sprawdz-postep"><i class="fa ti-stats-up"></i>Sprawdź postęp</a>
+
+                    <a class="nav-link" href="terminarz"><i class="fa ti-calendar"></i>Terminarz</a>
+
+                    <a class="nav-link" href="/logout"><i class="fa ti-power-off"></i>Wyloguj</a>
+                </div>
+                
+                <div class="user-menu dropdown-menu" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link" href="zakladanie-konta"><i class="fa ti-user"></i>Załóż konto</a>
+
+                    <a class="nav-link" href="edytuj-kursanta"><i class="fa ti-stats-up"></i>Edytuj kursanta</a>
+                    
+                    <a class="nav-link" href="edytuj-pracownika"><i class="fa ti-stats-up"></i>Edytuj pracownika</a>
+
+                    <a class="nav-link" href="/logout"><i class="fa ti-power-off"></i>Wyloguj</a>
+                </div>
+                
+            </div>
+        </div>
+        </div>
+    </div>
+</header>

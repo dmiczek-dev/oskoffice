@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <title>OSK Kursant</title>
+
+    <th:block th:include="/include/css" />
+
+</head>
+
+<body>
+
+<th:block th:include="include/header" />
+
+<div class="infbar">
+    <div class="container clearfix">
+        <div class="row">
+            <h2 class="mr-md-auto d-md-flex">Logowanie do konta</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="mybreadcrumb ml-md-auto d-md-flex mt-md-auto">
+                    <li class="breadcrumb-item"><a href="/">OSK Kursant</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Logowanie</li>
+                </ol>
+            </nav>
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+    <h1 class="form-heading">login Form</h1>
+    <div class="login-form">
+        <div class="main-div">
+            <div class="panel">
+                <h2>Logowanie</h2>
+                <p>Podaj swój login oraz hasło</p>
+            </div>
+            
+            <div th:if="${param.error}" class="mb-2 text-danger">
+                Błędny login lub hasło
+            </div>
+            
+             <div th:if="${param.logout}" class="mb-2 text-danger">
+                Wylogowano
+            </div>
+            
+            <form id="Login" th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <input name="login" type="text" class="form-control" id="inputEmail" placeholder="Nazwa użytkownika"/>
+                </div>
+                <div class="form-group">
+                    <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Hasło użytkownika"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Zaloguj</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="include/footer" />
+<th:block th:include="include/js" />
+
+</body>
+
+</html>

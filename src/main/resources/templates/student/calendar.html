@@ -1,0 +1,168 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+
+        <title>OSK Kursant</title>
+        <meta name="description" content="Konto kursanta"/>
+
+    <th:block th:include="panel/css" />
+    <link rel="stylesheet" href="/assets/css/lib/chosen/chosen.min.css"/>
+
+
+</head>
+
+<body>
+
+    <!--Sidebar-->
+<th:block th:include="panel/sidebar" />
+
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+
+    <!--Header-->
+    <th:block th:include="panel/header" />
+    <!-- /#header -->
+
+    <div class="breadcrumbs">
+        <div class="breadcrumbs-inner">
+            <div class="row m-0">
+                <div class="col-sm-4">
+                    <div class="page-header float-left">
+                        <div class="page-title">
+                            <h1>Nawigacja</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="page-header float-right">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a href="main">Strona główna</a></li>
+                                <li class="active">Terminarz</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Content -->
+
+    <div class="content">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="calendar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- /.content -->
+        <div class="clearfix"></div>
+        <!-- Footer -->
+        <th:block th:include="panel/footer" />
+
+    
+</div>
+<!-- /#right-panel -->
+<!-- Scripts -->
+<th:block th:include="panel/js" />
+<script src="/assets/js/lib/chosen/chosen.jquery.min.js"></script>
+
+<script type="text/javascript" th:inline="javascript">
+    //    <![CDATA[
+
+    jQuery(document).ready(function () {
+        jQuery(".standardSelect").chosen({
+            disable_search_threshold: 10,
+            no_results_text: "Oops, nothing found!",
+            width: "100%"
+        });
+    });
+
+    var events = [];
+
+    var terms = [[${terms}]];
+    console.log(terms);
+    for (i = 0; i < terms.length; i++) {
+//        Sprawdza czy termin jest praktyczny
+        if (terms[i].student || terms.vehicle) {
+            events.push({
+                id: terms[i].termId,
+                title: terms[i].student + '\n\n' + terms[i].employee + '\n' + terms[i].vehicle + '\n\n' + terms[i].description,
+                start: terms[i].date + 'T' + terms[i].startTime,
+                end: terms[i].date + 'T' + terms[i].endTime,
+                color: terms[i].color,
+                textColor: terms[i].textColor
+            });
+        } else {
+//            Wynik w przypadku gdy termin jest teoretyczny
+            events.push({
+                id: terms[i].termId,
+                title: terms[i].employee + '\n\n' + terms[i].description,
+                start: terms[i].date + 'T' + terms[i].startTime,
+                end: terms[i].date + 'T' + terms[i].endTime,
+                color: terms[i].color,
+                textColor: terms[i].textColor
+            });
+        }
+
+    }
+
+    jQuery(document).ready(function ($) {
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'agendaDay,agendaWeek,listWeek'
+            },
+            defaultView: 'agendaWeek',
+            minTime: '08:00:00',
+            maxTime: '18:00:00',
+            slotDuration: '00:15:00',
+            slotLabelFormat: [
+                'dddd',
+                "HH:mm"
+            ],
+            hiddenDays: [0],
+            eventOverlap: false,
+            slotEventOverlap: false,
+            handleWindowResize: true,
+            height: $(window).height() - 200,
+            slotLabelInterval: '01:00:00',
+            slotLabelFormat: 'HH:mm',
+            allDaySlot: false,
+            eventLimit: true,
+            schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+            events: events,
+            eventRender: function (event, element) {
+                if (event.rendering == 'background') {
+                    element.append(event.title);
+                    element.append(event.overlap);
+                }
+                element.popover({
+                    html: true
+                });
+            },   
+        });
+    });
+
+
+//    ]]>
+</script>
+
+</body>
+</html>
+
+

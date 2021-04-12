@@ -1,0 +1,31 @@
+.height-180 {
+    height: 180px;
+}
+
+#weatherWidget .currentDesc {
+    color: #ffffff!important;
+}
+
+.navbar-brand {
+    padding-bottom: 0px !important;
+}
+
+a {
+    color: #17a2b8;
+}
+
+.content {
+    min-height: 75vh;
+}
+
+.right-panel {
+    min-height: 95vh;
+}
+
+.fc-title {
+    font-weight: bold !important;
+}
+
+.fc-time {
+    font-weight: bold !important;
+}

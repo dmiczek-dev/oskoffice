@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>OSK Kursant</title>
+
+    <th:block th:include="include/css" />
+</head>
+
+<body>
+
+    <th:block th:include="include/header" />
+
+    <div class="infbar">
+        <div class="container clearfix">
+            <div class="row">
+                <h2 class="mr-md-auto d-md-flex">O nas</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="mybreadcrumb ml-md-auto d-md-flex mt-md-auto">
+                        <li class="breadcrumb-item"><a href="/">OSK Kursant</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">O nas</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container clearfix">
+        <div class="row">
+            <p class="mb-5 display-4 col-md-8 nav-tabs">Witamy na stronie OSK Kursant</p>
+            <blockquote class="blockquote col-md-8 text-justify font-weight-light">
+                <p class="mb-3">Nazywam się Pan XX, jestem instruktorem od 2010 roku, a w 2013 założyłem swoją działalność gospodarczą. <br />Posiadam prawo jazdy kategorii A,B,C,D,E,T oraz uprawnienia na instruktora kategorii B oraz C.
+                </p>
+                <p class="mb-3">
+                    O jakości oferowanych usług świadczą różne wyróżnienia oraz zadowolenie naszych kursantów, jeżeli chcesz dowiedzieć się więcej szczegółów - <a href="artykul-zdawalnosc" class="font-weight-normal">zapraszam do artykułu</a></p>
+                <p class="mb-3">
+                    Nasza firma oferuje pełne i profesjonalne szkolenie w kategorii B o którym możesz dowiedzieć się więcej <a href="cennik" class="font-weight-normal">tutaj</a></p>
+            </blockquote>
+            <figure class="figure col-md-4">
+                <img src="" class="figure-img img-fluid rounded" alt="Instruktor nauki jazdy"/>
+                <figcaption class="figure-caption">Właściciel oraz Ins. nauki jazdy</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <th:block th:include="include/footer" />
+    <th:block th:include="include/js" />
+
+</body>
+
+</html>

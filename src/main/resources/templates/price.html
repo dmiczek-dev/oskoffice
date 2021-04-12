@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>OSK Kursant</title>
+
+    <th:block th:include="include/css" />
+
+</head>
+
+<body>
+
+    <th:block th:include="include/header" />
+
+    <div class="infbar">
+        <div class="container clearfix">
+            <div class="row">
+                <h2 class="mr-md-auto d-md-flex">Cennik</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="mybreadcrumb ml-md-auto d-md-flex mt-md-auto">
+                        <li class="breadcrumb-item"><a href="/">OSK Kursant</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Cennik</li>
+                    </ol>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row row-flex">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="price-table pt-bg-cyan">
+                    <div>
+                        <span>kat.B</span>
+                        <span>Kurs podstawowy</span>
+                    </div>
+                    <ul>
+                        <li>Materiały szkoleniowe</li>
+                        <li>Zajęcia z ratownikiem medycznym</li>
+                        <li>30 godz. zajęć praktycznych</li>
+                        <li>Jazdy szkoleniowe na Skoda Fabia III</li>
+                    </ul>
+                    <p>1400 zł</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="price-table pt-bg-cyan">
+                    <div>
+                        <span>kat.B</span>
+                        <span>Kurs podstawowy + wykłady</span>
+                    </div>
+                    <ul>
+                        <li>Materiały szkoleniowe</li>
+                        <li>Zajęcia teoretyczne</li>
+                        <li>Zajęcia z ratownikiem medycznym</li>
+                        <li>30 godz. zajęć praktycznych</li>
+                        <li>Jazdy szkoleniowe na Skoda Fabia III</li>
+                    </ul>
+                    <p>1400 zł</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div class="price-table pt-bg-cyan">
+                    <div>
+                        <span>kat.B</span>
+                        <span>Godziny doszkalające</span>
+                    </div>
+                    <ul>
+                        <li>Wskazówki</li>
+                        <li>Sugestie</li>
+                        <li>Poprawa błędów</li>
+                        <li>Jazdy szkoleniowe na Skoda Fabia III</li>
+                    </ul>
+                    <p>50 zł/h</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:include="include/footer" />
+    <th:block th:include="include/js" />
+
+</body>
+
+</html>
